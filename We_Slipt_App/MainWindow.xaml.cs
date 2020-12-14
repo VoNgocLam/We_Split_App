@@ -45,6 +45,7 @@ namespace We_Slipt_App
             All.Foreground = fore;
             All.BorderBrush = border;
 
+            string sMember = "";
             int j = 0;
             int k = 1;
             var folder = AppDomain.CurrentDomain.BaseDirectory;
@@ -68,27 +69,45 @@ namespace We_Slipt_App
                     Type = (Trips.TripType)line2,
                     StartDate = line3,
                     EndDate = line4,
-                    Members= new BindingList<string>()
+                    Members= new BindingList<string>(),
+                    sMembers ="",
                 };
-                while(j < dataFile.Length-1)
+                while (j < dataFile.Length - 1)
                 {
-                    if (dataFile[k].Contains("-"))
+                    if (dataFile[j].Contains("- " + line1))
                     {
-                        k++;
-                        j++;
+                        while (k < dataFile.Length)
+                        {
+                            trip.Members.Add(dataFile[k]);
+                            sMember += dataFile[k] + " ";
+                            k++;
+                            j++;
+                            if (k == dataFile.Length)
+                            {
+                                trip.sMembers = sMember;
+                                break;
+                            }
+                            if (dataFile[k].Contains("-"))
+                            {
+                                trip.sMembers = sMember;
+                                j++;
+                                k++;
+                                break;
+                            };
+                        };
+                        sMember = "";
                         break;
                     }
-                    if(dataFile[j].Contains("- "+line1) || k < dataFile.Length)
+                    else
                     {
-                        trip.Members.Add(dataFile[k]);
-                        k++;
                         j++;
+                        k++;
                     }
                 }
                 _trips.Add(trip);
             }
             dataListview.ItemsSource = _trips;
-
+            SearchTextBox.Text = "";
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(dataListview.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Type");
             view.GroupDescriptions.Add(groupDescription);
@@ -157,6 +176,7 @@ namespace We_Slipt_App
             Accomplished.Foreground = black;
             Accomplished.BorderBrush = border;
 
+            string sMember = "";
             int j = 0;
             int k = 1;
             var folder = AppDomain.CurrentDomain.BaseDirectory;
@@ -180,27 +200,47 @@ namespace We_Slipt_App
                     Type = (Trips.TripType)line2,
                     StartDate = line3,
                     EndDate = line4,
-                    Members = new BindingList<string>()
+                    Members = new BindingList<string>(),
+                    sMembers = "",
                 };
                 while (j < dataFile.Length - 1)
                 {
-                    if (dataFile[k].Contains("-"))
+                    if (dataFile[j].Contains("- " + line1))
                     {
-                        k++;
-                        j++;
+                        while (k < dataFile.Length)
+                        {
+                            trip.Members.Add(dataFile[k]);
+                            sMember += dataFile[k] + " ";
+                            k++;
+                            j++;
+                            if (k == dataFile.Length)
+                            {
+                                trip.sMembers = sMember;
+                                break;
+                            }
+                            if (dataFile[k].Contains("-"))
+                            {
+                                trip.sMembers = sMember;
+                                j++;
+                                k++;
+                                break;
+                            };
+                        };
+                        sMember = "";
                         break;
                     }
-                    if (dataFile[j].Contains("- " + line1) || k < dataFile.Length)
+                    else
                     {
-                        trip.Members.Add(dataFile[k]);
-                        k++;
                         j++;
+                        k++;
                     }
                 }
                 _trips.Add(trip);
             }
             dataListview.ItemsSource = _trips;
             MemberItemsControl.ItemsSource = _trips.Take(0);
+            SearchTextBox.Text = "";
+
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(dataListview.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Type");
             view.GroupDescriptions.Add(groupDescription);
@@ -225,6 +265,7 @@ namespace We_Slipt_App
             Accomplished.Foreground = black;
             Accomplished.BorderBrush = border;
 
+            string sMember = "";
             int j = 0;
             int k = 1;
             var folder = AppDomain.CurrentDomain.BaseDirectory;
@@ -249,7 +290,8 @@ namespace We_Slipt_App
                         Type = (Trips.TripType)line2,
                         StartDate = line3,
                         EndDate = line4,
-                        Members = new BindingList<string>()
+                        Members = new BindingList<string>(),
+                        sMembers = "",
                     };
                     while (j < dataFile.Length - 1)
                     {
@@ -258,19 +300,23 @@ namespace We_Slipt_App
                             while (k < dataFile.Length)
                             {
                                 trip.Members.Add(dataFile[k]);
+                                sMember += dataFile[k] + " ";
                                 k++;
                                 j++;
-                                if(k==dataFile.Length)
+                                if (k == dataFile.Length)
                                 {
+                                    trip.sMembers = sMember;
                                     break;
                                 }
                                 if (dataFile[k].Contains("-"))
                                 {
+                                    trip.sMembers = sMember;
                                     j++;
                                     k++;
                                     break;
                                 };
                             };
+                            sMember = "";
                             break;
                         }
                         else
@@ -284,6 +330,7 @@ namespace We_Slipt_App
             }
             dataListview.ItemsSource = _trips;
             MemberItemsControl.ItemsSource = _trips.Take(0);
+            SearchTextBox.Text = "";
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(dataListview.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Type");
@@ -310,6 +357,7 @@ namespace We_Slipt_App
             Processing.Foreground = black;
             Processing.BorderBrush = border;
 
+            string sMember = "";
             int j = 0;
             int k = 1;
             var folder = AppDomain.CurrentDomain.BaseDirectory;
@@ -327,48 +375,54 @@ namespace We_Slipt_App
                 {
                     var line1 = database[i * 6];
                     var line3 = database[i * 6 + 4];
-                    var line4 = database[i * 6 + 5];                   
+                    var line4 = database[i * 6 + 5];
                     var trip = new Trips()
                     {
                         Name = line1,
                         Type = (Trips.TripType)line2,
                         StartDate = line3,
                         EndDate = line4,
-                        Members = new BindingList<string>()
+                        Members = new BindingList<string>(),
+                        sMembers = "",
                     };
                     while (j < dataFile.Length - 1)
-                    {                        
+                    {
                         if (dataFile[j].Contains("- " + line1))
                         {
-                            while(k < dataFile.Length)
+                            while (k < dataFile.Length)
                             {
                                 trip.Members.Add(dataFile[k]);
+                                sMember += dataFile[k] + " ";
                                 k++;
                                 j++;
                                 if (k == dataFile.Length)
                                 {
+                                    trip.sMembers = sMember;
                                     break;
                                 }
                                 if (dataFile[k].Contains("-"))
                                 {
+                                    trip.sMembers = sMember;
                                     j++;
                                     k++;
                                     break;
                                 };
                             };
+                            sMember = "";
                             break;
                         }
                         else
                         {
                             j++;
                             k++;
-                        }                      
-                    }             
+                        }
+                    }
                     _trips.Add(trip);
                 }
             }
             dataListview.ItemsSource = _trips;
             MemberItemsControl.ItemsSource = _trips.Take(0);
+            SearchTextBox.Text = "";
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(dataListview.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Type");
@@ -442,5 +496,32 @@ namespace We_Slipt_App
             _detailtrip.Add(index);
             MemberItemsControl.ItemsSource = _detailtrip;
         }
+
+        private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            var searchkeyword = SearchTextBox.Text;
+           
+                ObservableCollection<Trips> results = new ObservableCollection<Trips>();
+                for (int i = 0; i < _trips.Count; i++)
+                {
+                    if ((_trips[i].Name).ToLower().Contains((SearchTextBox.Text).ToLower()) || (_trips[i].Name).ToUpper().Contains((SearchTextBox.Text).ToUpper()) || (_trips[i].sMembers).ToLower().Contains((SearchTextBox.Text).ToLower()) || (_trips[i].sMembers).ToUpper().Contains((SearchTextBox.Text).ToUpper()))
+                    {
+                        results.Add(_trips[i]);
+                    }
+                }
+                if (results.Count > 0)
+                {
+                    dataListview.ItemsSource = results;
+                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(dataListview.ItemsSource);
+                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("Type");
+                    view.GroupDescriptions.Add(groupDescription);
+                }
+                if (results.Count == 0)
+                {
+                    dataListview.ItemsSource = results.Take(0);
+                }
+            }    
+           
+
     }
 }

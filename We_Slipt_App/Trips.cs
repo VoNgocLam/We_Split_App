@@ -26,7 +26,7 @@ namespace We_Slipt_App
         public string Leader { get; set; }
         public BindingList<string> Images { get; set; }
         public string Icon { get; set; }
-        public string ThanhVien { get; set; }
+        public string sMembers { get; set; }
         public string DiaDiem { get; set; }
     }
 }

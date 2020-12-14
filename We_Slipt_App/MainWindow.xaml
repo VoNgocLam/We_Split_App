@@ -19,6 +19,15 @@
  
     <DockPanel Name="Main" LastChildFill="True" >
         <Grid Name="TopGrid" DockPanel.Dock="Top" Height="50" VerticalAlignment="Top" Background="#dfdddf">
+
+            <Grid Height="35" HorizontalAlignment="Right" Margin="0,0,30,0">
+                <Border BorderThickness="0" CornerRadius="5" Background="white">
+                    <DockPanel>
+                        <Image Source="Assets/search.png" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Right" Margin="20,0,0,0"/>
+                        <TextBox x:Name="SearchTextBox" KeyUp="SearchTextBox_KeyUp" materialDesign:HintAssist.Hint="Nhập từ khóa tìm kiếm" Margin="5,0,0,0" HorizontalAlignment="Left" Width="215" Height="35" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" VerticalContentAlignment="Center" FontSize="15" SelectionBrush="#FF215BFF" />
+                    </DockPanel>
+                </Border>
+            </Grid>
             
             <Label Name="TopLabel" HorizontalAlignment="Center" Content="We Slipt App" Height="50" FontSize="20" VerticalContentAlignment="Center" Foreground="#676767"/>
                 
@@ -35,6 +44,8 @@
                 <Button Name="MaximizeButton" Click="MaximizeButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Visibility="Visible" Height="15" Width="15"  BorderBrush="{x:Null}" Background="#d1ddd1" Margin="10,0,00,0">
                     <materialDesign:PackIcon Kind="WindowMaximize" Width="10" Height="10" Foreground="#8d908d" />
                 </Button>
+
+               
 
             </WrapPanel>
         </Grid>
