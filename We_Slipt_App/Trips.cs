@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace We_Slipt_App
 {
-    class Trips
+    public class Trips
     {
         public string Name { get; set; }
         public string Introduce { get; set; }
@@ -18,15 +18,17 @@ namespace We_Slipt_App
         public enum TripType : int { Processing, Accomplished };
         public TripType Type { get; set; }
         public BindingList<string> Members { get; set; }
-        public ObservableCollection<string> Routes { get; set; }
-        public ObservableCollection<string> Expenses { get; set; }
-        public ObservableCollection<string> Money { get; set; }
-        public ObservableCollection<string> Remark { get; set; }
+        public BindingList<string> Routes { get; set; }
+        public ObservableCollection<Cash> Expenses { get; set; }
+        public ObservableCollection<Cash> ReceivedMoney { get; set; }
         public string Description { get; set; }
-        public string Leader { get; set; }
         public BindingList<string> Images { get; set; }
-        public string Icon { get; set; }
         public string sMembers { get; set; }
-        public string DiaDiem { get; set; }
+    }
+
+    public class Cash
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
     }
 }

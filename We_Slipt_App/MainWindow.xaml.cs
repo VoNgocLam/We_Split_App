@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Globalization;
+
 namespace We_Slipt_App
 {
     /// <summary>
@@ -59,16 +61,19 @@ namespace We_Slipt_App
             for (int i = 0; i < count; i++)
             {
                 var line1 = database[i * 6];
-                int line2 = int.Parse(database[i * 6 + 3]);
-                var line3 = database[i * 6 + 4];
-                var line4 = database[i * 6 + 5];
-               
+                var line2 = database[i * 6 + 1];
+                var line3 = database[i * 6 + 2];
+                int line4 = int.Parse(database[i * 6 + 3]);
+                DateTime line5 = DateTime.ParseExact(database[i * 6 + 4], "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                DateTime line6 = DateTime.ParseExact(database[i * 6 + 5], "MM-dd-yyyy", CultureInfo.InvariantCulture);
                 var trip = new Trips()
                 {
                     Name = line1,
-                    Type = (Trips.TripType)line2,
-                    StartDate = line3,
-                    EndDate = line4,
+                    Introduce=line2,
+                    Picture = $"{folder}Images\\{line3}",
+                    Type = (Trips.TripType)line4,
+                    StartDate = line5.ToShortDateString(),
+                    EndDate = line6.ToShortDateString(),
                     Members= new BindingList<string>(),
                     sMembers ="",
                 };
@@ -113,17 +118,17 @@ namespace We_Slipt_App
             view.GroupDescriptions.Add(groupDescription);
         }
 
-            private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
+         private void ExitButton_Click(object sender, RoutedEventArgs e)
             {
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+                try
+                {
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+           }
 
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -190,16 +195,20 @@ namespace We_Slipt_App
             for (int i = 0; i < count; i++)
             {
                 var line1 = database[i * 6];
-                int line2 = int.Parse(database[i * 6 + 3]);
-                var line3 = database[i * 6 + 4];
-                var line4 = database[i * 6 + 5];
+                var line2 = database[i * 6 + 1];
+                var line3 = database[i * 6 + 2];
+                int line4 = int.Parse(database[i * 6 + 3]);
+                DateTime line5 = DateTime.ParseExact(database[i * 6 + 4], "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                DateTime line6 = DateTime.ParseExact(database[i * 6 + 5], "MM-dd-yyyy", CultureInfo.InvariantCulture);
 
                 var trip = new Trips()
                 {
                     Name = line1,
-                    Type = (Trips.TripType)line2,
-                    StartDate = line3,
-                    EndDate = line4,
+                    Introduce = line2,
+                    Picture = $"{folder}Images\\{line3}",
+                    Type = (Trips.TripType)line4,
+                    StartDate = line5.ToShortDateString(),
+                    EndDate = line6.ToShortDateString(),
                     Members = new BindingList<string>(),
                     sMembers = "",
                 };
@@ -278,21 +287,27 @@ namespace We_Slipt_App
             _trips = new ObservableCollection<Trips>();
             for (int i = 0; i < count; i++)
             {
-                int line2 = int.Parse(database[i * 6 + 3]);
-                if (line2 == 0)
+                int line4 = int.Parse(database[i * 6 + 3]);
+                if (line4 == 0)
                 {
                     var line1 = database[i * 6];
-                    var line3 = database[i * 6 + 4];
-                    var line4 = database[i * 6 + 5];
+                    var line2 = database[i * 6 + 1];
+                    var line3 = database[i * 6 + 2];
+                    DateTime line5 = DateTime.ParseExact(database[i * 6 + 4], "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                    DateTime line6 = DateTime.ParseExact(database[i * 6 + 5], "MM-dd-yyyy", CultureInfo.InvariantCulture);
+
                     var trip = new Trips()
                     {
                         Name = line1,
-                        Type = (Trips.TripType)line2,
-                        StartDate = line3,
-                        EndDate = line4,
+                        Introduce = line2,
+                        Picture = $"{folder}Images\\{line3}",
+                        Type = (Trips.TripType)line4,
+                        StartDate = line5.ToShortDateString(),
+                        EndDate = line6.ToShortDateString(),
                         Members = new BindingList<string>(),
                         sMembers = "",
                     };
+               
                     while (j < dataFile.Length - 1)
                     {
                         if (dataFile[j].Contains("- " + line1))
@@ -370,21 +385,27 @@ namespace We_Slipt_App
             _trips = new ObservableCollection<Trips>();
             for (int i = 0; i < count; i++)
             {
-                int line2 = int.Parse(database[i * 6 + 3]);
-                if (line2 == 1)
+                int line4 = int.Parse(database[i * 6 + 3]);
+                if (line4 == 1)
                 {
                     var line1 = database[i * 6];
-                    var line3 = database[i * 6 + 4];
-                    var line4 = database[i * 6 + 5];
+                    var line2 = database[i * 6 + 1];
+                    var line3 = database[i * 6 + 2];
+                    DateTime line5 = DateTime.ParseExact(database[i * 6 + 4], "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                    DateTime line6 = DateTime.ParseExact(database[i * 6 + 5], "MM-dd-yyyy", CultureInfo.InvariantCulture);
+
                     var trip = new Trips()
                     {
                         Name = line1,
-                        Type = (Trips.TripType)line2,
-                        StartDate = line3,
-                        EndDate = line4,
+                        Introduce = line2,
+                        Picture = $"{folder}Images\\{line3}",
+                        Type = (Trips.TripType)line4,
+                        StartDate = line5.ToShortDateString(),
+                        EndDate = line6.ToShortDateString(),
                         Members = new BindingList<string>(),
                         sMembers = "",
                     };
+
                     while (j < dataFile.Length - 1)
                     {
                         if (dataFile[j].Contains("- " + line1))
@@ -520,8 +541,16 @@ namespace We_Slipt_App
                 {
                     dataListview.ItemsSource = results.Take(0);
                 }
-            }    
-           
+            }
 
+        private void dataListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var trip = (sender as ListView).SelectedItem as Trips;
+            if (trip != null)
+            {
+                Main.Children.Clear();
+                Main.Children.Add(new TripDetailControl(trip));
+            }
+        }
     }
 }

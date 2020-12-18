@@ -22,3 +22,13 @@ C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\obj\Debug\We_Slipt_App.csproj.C
 C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\obj\Debug\We_Slipt_App.csproj.CopyComplete
 C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\obj\Debug\We_Slipt_App.exe
 C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\obj\Debug\We_Slipt_App.pdb
+C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\obj\Debug\TripDetailScreen.g.cs
+C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\obj\Debug\TripDetailScreen.baml
+C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\obj\Debug\TripDetailControl.g.cs
+C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\obj\Debug\TripDetailControl.baml
+C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\bin\Debug\LiveCharts.dll
+C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\bin\Debug\LiveCharts.pdb
+C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\bin\Debug\LiveCharts.xml
+C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\vongo\Desktop\We_Slipt_App\We_Slipt_App\bin\Debug\LiveCharts.Wpf.xml

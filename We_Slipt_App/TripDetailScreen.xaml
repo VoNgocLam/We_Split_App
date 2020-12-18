@@ -1,0 +1,40 @@
+﻿<Window x:Class="We_Slipt_App.TripDetailScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:We_Slipt_App"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="Transparent"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Title="TripDetailScreen"  Height="800" Width="1400" UseLayoutRounding="False" RenderOptions.BitmapScalingMode="HighQuality" WindowStartupLocation="CenterScreen">
+    <DockPanel Name="Detail" LastChildFill="True" >
+        <Grid Name="TopGrid" DockPanel.Dock="Top" Height="50" VerticalAlignment="Top" Background="#dfdddf">
+            <Label Name="TopLabel" HorizontalAlignment="Center" Content="We Slipt App" Height="50" FontSize="20" VerticalContentAlignment="Center" Foreground="#676767"/>
+
+            <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+
+                <Button  Name="ExitButton" Click="ExitButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Visibility="Visible" Height="15" Width="15"  BorderBrush="{x:Null}" Background="#fc605c" Margin="10,0,0,0">
+                    <materialDesign:PackIcon Kind="Close" Width="10" Height="10" Foreground="#7e0509" />
+                </Button>
+
+                <Button Name="MinimizeButton" Click="MinimizeButton_Click"  Style="{StaticResource MaterialDesignFloatingActionButton}" Visibility="Visible" Height="15" Width="15"  BorderBrush="{x:Null}" Background="#fec041" Margin="10,0,0,0">
+                    <materialDesign:PackIcon Kind="WindowMinimize" Width="10" Height="10" Foreground="#985712" />
+                </Button>
+
+                <Button Name="MaximizeButton" Click="MaximizeButton_Click" Style="{StaticResource MaterialDesignFloatingActionButton}" Visibility="Visible" Height="15" Width="15"  BorderBrush="{x:Null}" Background="#d1ddd1" Margin="10,0,00,0">
+                    <materialDesign:PackIcon Kind="WindowMaximize" Width="10" Height="10" Foreground="#8d908d" />
+                </Button>
+            </WrapPanel>
+        </Grid>
+        <Grid Background="White"></Grid>
+    </DockPanel>
+</Window>
