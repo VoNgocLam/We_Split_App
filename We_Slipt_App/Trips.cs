@@ -21,7 +21,6 @@ namespace We_Slipt_App
         public BindingList<string> Routes { get; set; }
         public ObservableCollection<Cash> Expenses { get; set; }
         public ObservableCollection<Cash> ReceivedMoney { get; set; }
-        public string Description { get; set; }
         public BindingList<string> Images { get; set; }
         public string sMembers { get; set; }
     }

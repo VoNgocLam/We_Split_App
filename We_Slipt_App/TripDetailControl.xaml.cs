@@ -29,6 +29,10 @@ namespace We_Slipt_App
     {
         private Trips _data;
 
+        ObservableCollection<Cash> listMember = new ObservableCollection<Cash>();
+        ObservableCollection<Cash> listExpenses = new ObservableCollection<Cash>();
+
+
         BindingList<Trips> _listdetails;
         public SeriesCollection ReceivedMoneyData { get; set; }
         public SeriesCollection ExpensesData { get; set; }
@@ -114,18 +118,23 @@ namespace We_Slipt_App
                 ExpensesData.Add(chartData);
             }
 
-            ExpensesChart.DataContext = ExpensesData;
-            ReceivedMoneyChart.DataContext = ReceivedMoneyData;
-            dataMembers.ItemsSource = trip.ReceivedMoney;
-
             //Routes
             string fileRoutes = folder + "Location.txt";
             var dataFileRoutes = File.ReadAllLines(fileRoutes);
-            for(int i=0; i<dataFileRoutes.Length; i++)
+            for (int i = 0; i < dataFileRoutes.Length; i++)
             {
                 trip.Routes.Add(dataFileRoutes[i]);
             };
             _listdetails.Add(trip);
+
+            RoutesPanel.Visibility = Visibility.Visible;
+            ButtonPanel.Visibility = Visibility.Visible;
+            ExpensesChart.DataContext = ExpensesData;
+            ReceivedMoneyChart.DataContext = ReceivedMoneyData;
+            dataMembers.Visibility = Visibility.Visible;
+            dataMembers.ItemsSource = _listdetails[0].ReceivedMoney;
+
+            
         }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
@@ -153,6 +162,7 @@ namespace We_Slipt_App
             }
             else
             {
+
                 RoutesItemsControl.Visibility = Visibility.Visible;
                 HideButton.Content = "Ẩn lộ trình";
                 var converter = new System.Windows.Media.BrushConverter();
@@ -164,7 +174,9 @@ namespace We_Slipt_App
 
         private void AddMember_Click(object sender, RoutedEventArgs e)
         {
-
+            ButtonPanel.Visibility = Visibility.Collapsed;
+            dataMembers.Visibility = Visibility.Collapsed;
+            MemberUserControl.Visibility = Visibility.Visible;
         }
 
         private void UpdateMember_Click(object sender, RoutedEventArgs e)
@@ -196,12 +208,6 @@ namespace We_Slipt_App
             }
             Photo.ItemsSource = _listdetails;          
         }
-
-        private void AddDetailTrip_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Accomplished_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Bạn có muốn kết thúc?", "", MessageBoxButton.YesNo);
@@ -234,5 +240,117 @@ namespace We_Slipt_App
                 }
             }
         }
+
+        private void AddMemberUseControl_Click(object sender, RoutedEventArgs e)
+        {
+            if(NameMember.Text == "")
+            {
+                MessageBox.Show("Họ tên không được để trống");
+                ValueCash.Text = "";
+            }
+            else 
+            {
+                if (ValueCash.Text == "")
+                    ValueCash.Text = "0";
+                Cash item = new Cash()
+                {
+                    Name = NameMember.Text,
+                    Value = int.Parse(ValueCash.Text)
+                };
+                var chartData = new PieSeries()
+                {
+                    Title = item.Name,
+                    Values = new ChartValues<int> { item.Value }
+                };
+
+                listMember.Add(item);
+                _listdetails[0].ReceivedMoney.Add(item);
+                ReceivedMoneyData.Add(chartData);
+                NameMember.Text = "";
+                ValueCash.Text = "";
+            }               
+        }
+
+        private void CreateMemberUseControl_Click(object sender, RoutedEventArgs e)
+        {
+            var folder = AppDomain.CurrentDomain.BaseDirectory;
+            string folderTrip = folder + $"\\List\\{_data.Name}\\";
+            string pathMember = folderTrip + "Members.txt";
+            for (int i = 0; i < listMember.Count(); i++)
+            {
+                using (StreamWriter sw = File.AppendText(pathMember))
+                {
+                    sw.WriteLine(listMember[i].Name);
+                    sw.WriteLine(listMember[i].Value);
+                }
+            }
+            ButtonPanel.Visibility = Visibility.Visible;
+            dataMembers.Visibility = Visibility.Visible;
+            dataMembers.ItemsSource = _listdetails[0].ReceivedMoney;
+            MemberUserControl.Visibility = Visibility.Collapsed;
+        }
+
+        private void AddDetailTrip_Click(object sender, RoutedEventArgs e)
+        {
+            RoutesPanel.Visibility = Visibility.Collapsed;
+            AddRoutesPanel.Visibility = Visibility.Visible;
+        }
+        private void AddExpenses_Click(object sender, RoutedEventArgs e)
+        {
+            if (TitlExpenses.Text == "" || ValueExpenses.Text == "")
+            {
+                MessageBox.Show("Mô tả không được để trống");
+                TitlExpenses.Text = "";
+                ValueExpenses.Text = "";
+            }
+            else
+            {               
+                Cash item = new Cash()
+                {
+                    Name = TitlExpenses.Text,
+                    Value = int.Parse(ValueExpenses.Text)
+                };
+                var chartData = new PieSeries()
+                {
+                    Title = item.Name,
+                    Values = new ChartValues<int> { item.Value }
+                };
+                listExpenses.Add(item);
+                _listdetails[0].Expenses.Add(item);
+                ExpensesData.Add(chartData);
+                TitlExpenses.Text = "";
+                ValueExpenses.Text = "";
+            }
+        }
+
+        private void CreateRoutes_Click(object sender, RoutedEventArgs e)
+        {
+            var folder = AppDomain.CurrentDomain.BaseDirectory;
+            string folderTrip = folder + $"\\List\\{_data.Name}\\";
+            string pathLocation = folderTrip + "Location.txt";
+            string pathExpenses = folderTrip + "Expenses.txt";
+
+            for (int i = 0; i < listExpenses.Count(); i++)
+            {
+                using (StreamWriter sw = File.AppendText(pathExpenses))
+                {
+                    sw.WriteLine(listExpenses[i].Name);
+                    sw.WriteLine(listExpenses[i].Value);
+                }
+            }
+            if(NameRoutes.Text != "")
+            {
+                using (StreamWriter sw = File.AppendText(pathLocation))
+                {
+                    sw.WriteLine(NameRoutes.Text);
+                }
+                _listdetails[0].Routes.Add(NameRoutes.Text);
+            }
+            RoutesItemsControl.ItemsSource = _listdetails;
+            RoutesPanel.Visibility = Visibility.Visible;
+            AddRoutesPanel.Visibility = Visibility.Collapsed;
+        }
+
+      
     }
 }
